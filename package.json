@@ -4,7 +4,13 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "format": "npx concurrently \"npm:format:*\"",
+        "format:js": "prettier --write \"resources/**/*.{js,jsx,ts,tsx,css,blade.php}\"",
+        "format:php": "vendor/bin/pint",
+        "lint": "npx concurrently \"npm:lint:*\"",
+        "lint:js": "prettier --check \"resources/**/*.{js,jsx,ts,tsx,css,blade.php}\"",
+        "lint:php": "vendor/bin/pint --test"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.1.11",
@@ -19,5 +25,10 @@
         "@rollup/rollup-linux-x64-gnu": "4.9.5",
         "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
         "lightningcss-linux-x64-gnu": "^1.29.1"
+    },
+    "devDependencies": {
+        "prettier": "^3.7.4",
+        "prettier-plugin-blade": "^2.1.21",
+        "prettier-plugin-tailwindcss": "^0.7.2"
     }
 }
