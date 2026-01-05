@@ -23,10 +23,13 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(
             when(
                 Features::canManageTwoFactorAuthentication()
-                    && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
+                && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
                 ['password.confirm'],
                 [],
             ),
         )
         ->name('two-factor.show');
+
+    // AdminLTE Examples
+    Route::view('examples/simple-tables', 'pages.examples.simple-tables')->name('examples.simple-tables');
 });

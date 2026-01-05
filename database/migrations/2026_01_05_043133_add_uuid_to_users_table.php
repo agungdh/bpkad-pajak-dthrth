@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -27,10 +26,16 @@ return new class extends Migration
         // Make uuid non-nullable
         Schema::table('users', function (Blueprint $table) {
             $table->uuid('uuid')->nullable(false)->change();
+
+            // Create hash index for fast equality lookups if supported, otherwise standard index
+            if (DB::getDriverName() === 'mysql' || DB::getDriverName() === 'pgsql') {
+                DB::statement('CREATE INDEX users_uuid_hash ON users USING hash (uuid);');
+            } else {
+                $table->index('uuid', 'users_uuid_hash');
+            }
         });
 
-        // Create hash index for fast equality lookups
-        DB::statement('CREATE INDEX users_uuid_hash ON users USING hash (uuid);');
+
     }
 
     /**

@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,7 +19,13 @@ return new class extends Migration
         });
 
         // Create hash index for UUID
-        DB::statement('CREATE INDEX skpds_uuid_hash ON skpds USING hash (uuid);');
+        if (DB::getDriverName() === 'mysql' || DB::getDriverName() === 'pgsql') {
+            DB::statement('CREATE INDEX skpds_uuid_hash ON skpds USING hash (uuid);');
+        } else {
+            Schema::table('skpds', function (Blueprint $table) {
+                $table->index('uuid', 'skpds_uuid_hash');
+            });
+        }
     }
 
     /**

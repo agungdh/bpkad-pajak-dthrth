@@ -46,6 +46,16 @@
                         </a>
                     </li>
                 @endcan
+
+                <li class="nav-header">EXAMPLES</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('examples.simple-tables') }}"
+                        class="nav-link {{ request()->routeIs('examples.simple-tables') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-table"></i>
+                        <p>Simple Tables</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
