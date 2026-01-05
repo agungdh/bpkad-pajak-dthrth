@@ -9,4 +9,5 @@ class Skpd extends Model
 {
     /** @use HasFactory<\Database\Factories\SkpdFactory> */
     use HasFactory;
+    use \App\Traits\HasUuid;
 }

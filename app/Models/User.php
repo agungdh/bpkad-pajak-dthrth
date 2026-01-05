@@ -15,6 +15,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasAuditColumns, HasFactory, HasRoles, Notifiable;
+    use \App\Traits\HasUuid;
 
     /**
      * Indicates if the model should be timestamped.
@@ -35,20 +36,6 @@ class User extends Authenticatable
         'password',
         'uuid',
     ];
-
-    /**
-     * Boot the model.
-     */
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            if (empty($user->uuid)) {
-                $user->uuid = (string) Str::uuid();
-            }
-        });
-    }
 
     /**
      * The attributes that should be hidden for serialization.
