@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skpd extends Model
 {
+    use \App\Traits\HasUuid;
+
     /** @use HasFactory<\Database\Factories\SkpdFactory> */
     use HasFactory;
-    use \App\Traits\HasUuid;
 
     /**
      * The attributes that aren't mass assignable.

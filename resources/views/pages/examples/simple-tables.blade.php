@@ -5,7 +5,9 @@
 @section('page-title', 'Simple Tables')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard') }}">Home</a>
+    </li>
     <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
 @endsection
 
@@ -19,7 +21,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table-bordered table">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -34,45 +36,71 @@
                                 <td>Update software</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        <div
+                                            class="progress-bar progress-bar-danger"
+                                            style="width: 55%"
+                                        ></div>
                                     </div>
                                 </td>
-                                <td><span class="badge text-bg-danger">55%</span></td>
+                                <td>
+                                    <span class="badge text-bg-danger">
+                                        55%
+                                    </span>
+                                </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>2.</td>
                                 <td>Clean database</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+                                        <div
+                                            class="progress-bar text-bg-warning"
+                                            style="width: 70%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-warning">70%</span>
+                                    <span class="badge text-bg-warning">
+                                        70%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>3.</td>
                                 <td>Cron job running</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-primary"
+                                            style="width: 30%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-primary">30%</span>
+                                    <span class="badge text-bg-primary">
+                                        30%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>4.</td>
                                 <td>Fix and squish bugs</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-success" style="width: 90%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-success"
+                                            style="width: 90%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-success">90%</span>
+                                    <span class="badge text-bg-success">
+                                        90%
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
@@ -80,7 +108,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
+                    <ul class="pagination pagination-sm float-end m-0">
                         <li class="page-item">
                             <a class="page-link" href="#">&laquo;</a>
                         </li>
@@ -107,7 +135,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
-                    <table class="table table-sm">
+                    <table class="table-sm table">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -122,45 +150,71 @@
                                 <td>Update software</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        <div
+                                            class="progress-bar progress-bar-danger"
+                                            style="width: 55%"
+                                        ></div>
                                     </div>
                                 </td>
-                                <td><span class="badge text-bg-danger">55%</span></td>
+                                <td>
+                                    <span class="badge text-bg-danger">
+                                        55%
+                                    </span>
+                                </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>2.</td>
                                 <td>Clean database</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+                                        <div
+                                            class="progress-bar text-bg-warning"
+                                            style="width: 70%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-warning">70%</span>
+                                    <span class="badge text-bg-warning">
+                                        70%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>3.</td>
                                 <td>Cron job running</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-primary"
+                                            style="width: 30%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-primary">30%</span>
+                                    <span class="badge text-bg-primary">
+                                        30%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>4.</td>
                                 <td>Fix and squish bugs</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-success" style="width: 90%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-success"
+                                            style="width: 90%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-success">90%</span>
+                                    <span class="badge text-bg-success">
+                                        90%
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
@@ -213,45 +267,71 @@
                                 <td>Update software</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        <div
+                                            class="progress-bar progress-bar-danger"
+                                            style="width: 55%"
+                                        ></div>
                                     </div>
                                 </td>
-                                <td><span class="badge text-bg-danger">55%</span></td>
+                                <td>
+                                    <span class="badge text-bg-danger">
+                                        55%
+                                    </span>
+                                </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>2.</td>
                                 <td>Clean database</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+                                        <div
+                                            class="progress-bar text-bg-warning"
+                                            style="width: 70%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-warning">70%</span>
+                                    <span class="badge text-bg-warning">
+                                        70%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>3.</td>
                                 <td>Cron job running</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-primary"
+                                            style="width: 30%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-primary">30%</span>
+                                    <span class="badge text-bg-primary">
+                                        30%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>4.</td>
                                 <td>Fix and squish bugs</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-success" style="width: 90%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-success"
+                                            style="width: 90%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-success">90%</span>
+                                    <span class="badge text-bg-success">
+                                        90%
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
@@ -267,7 +347,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
-                    <table class="table table-striped">
+                    <table class="table-striped table">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -282,45 +362,71 @@
                                 <td>Update software</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        <div
+                                            class="progress-bar progress-bar-danger"
+                                            style="width: 55%"
+                                        ></div>
                                     </div>
                                 </td>
-                                <td><span class="badge text-bg-danger">55%</span></td>
+                                <td>
+                                    <span class="badge text-bg-danger">
+                                        55%
+                                    </span>
+                                </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>2.</td>
                                 <td>Clean database</td>
                                 <td>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+                                        <div
+                                            class="progress-bar text-bg-warning"
+                                            style="width: 70%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-warning">70%</span>
+                                    <span class="badge text-bg-warning">
+                                        70%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>3.</td>
                                 <td>Cron job running</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-primary"
+                                            style="width: 30%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-primary">30%</span>
+                                    <span class="badge text-bg-primary">
+                                        30%
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="align-middle">
                                 <td>4.</td>
                                 <td>Fix and squish bugs</td>
                                 <td>
-                                    <div class="progress progress-xs progress-striped active">
-                                        <div class="progress-bar text-bg-success" style="width: 90%"></div>
+                                    <div
+                                        class="progress progress-xs progress-striped active"
+                                    >
+                                        <div
+                                            class="progress-bar text-bg-success"
+                                            style="width: 90%"
+                                        ></div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge text-bg-success">90%</span>
+                                    <span class="badge text-bg-success">
+                                        90%
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>

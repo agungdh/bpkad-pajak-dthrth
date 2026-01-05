@@ -15,11 +15,19 @@
     <div class="sidebar-wrapper">
         <nav class="mt-2">
             <!--begin::Sidebar Menu-->
-            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
-                aria-label="Main navigation" data-accordion="false" id="navigation">
+            <ul
+                class="nav sidebar-menu flex-column"
+                data-lte-toggle="treeview"
+                role="navigation"
+                aria-label="Main navigation"
+                data-accordion="false"
+                id="navigation"
+            >
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <a
+                        href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                    >
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
@@ -29,8 +37,10 @@
 
                 @can('viewAny', App\Models\Skpd::class)
                     <li class="nav-item">
-                        <a href="{{ route('skpds.index') }}"
-                            class="nav-link {{ request()->routeIs('skpds.*') ? 'active' : '' }}">
+                        <a
+                            href="{{ route('skpds.index') }}"
+                            class="nav-link {{ request()->routeIs('skpds.*') ? 'active' : '' }}"
+                        >
                             <i class="nav-icon bi bi-building"></i>
                             <p>SKPD</p>
                         </a>
@@ -39,8 +49,10 @@
 
                 @can('viewAny', App\Models\User::class)
                     <li class="nav-item">
-                        <a href="{{ route('users.index') }}"
-                            class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                        <a
+                            href="{{ route('users.index') }}"
+                            class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
+                        >
                             <i class="nav-icon bi bi-people"></i>
                             <p>Users</p>
                         </a>
@@ -50,8 +62,10 @@
                 <li class="nav-header">EXAMPLES</li>
 
                 <li class="nav-item">
-                    <a href="{{ route('examples.simple-tables') }}"
-                        class="nav-link {{ request()->routeIs('examples.simple-tables') ? 'active' : '' }}">
+                    <a
+                        href="{{ route('examples.simple-tables') }}"
+                        class="nav-link {{ request()->routeIs('examples.simple-tables') ? 'active' : '' }}"
+                    >
                         <i class="nav-icon bi bi-table"></i>
                         <p>Simple Tables</p>
                     </a>
