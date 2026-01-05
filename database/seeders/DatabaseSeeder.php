@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
         // Seed roles first
         $this->call(RoleSeeder::class);
 
+        // Seed SKPDs
+        $this->call(SkpdSeeder::class);
+
         // Create factory users and assign pegawai role
         User::factory(10)->create()->each(function ($user) {
             $user->assignRole('pegawai');
