@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use App\Traits\HasUuid;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use \App\Traits\HasUuid;
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasAuditColumns, HasFactory, HasRoles, Notifiable;
+    use HasAuditColumns, HasFactory, HasRoles, HasUuid, Notifiable;
 
     /**
      * Indicates if the model should be timestamped.
@@ -74,7 +74,7 @@ class User extends Authenticatable
     /**
      * Get the SKPD that the user belongs to.
      */
-    public function skpd(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function skpd(): BelongsTo
     {
         return $this->belongsTo(Skpd::class);
     }
@@ -87,7 +87,7 @@ class User extends Authenticatable
         return Str::of($this->name)
             ->explode(' ')
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
 }
