@@ -35,6 +35,7 @@ class User extends Authenticatable
         'email',
         'password',
         'uuid',
+        'skpd_id',
     ];
 
     /**
@@ -68,6 +69,14 @@ class User extends Authenticatable
             'deleted_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the SKPD that the user belongs to.
+     */
+    public function skpd(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Skpd::class);
     }
 
     /**
