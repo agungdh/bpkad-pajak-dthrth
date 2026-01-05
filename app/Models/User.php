@@ -14,7 +14,14 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasAuditColumns, HasFactory, Notifiable, TwoFactorAuthenticatable, HasRoles;
+    use HasAuditColumns, HasFactory, HasRoles, Notifiable, TwoFactorAuthenticatable;
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
