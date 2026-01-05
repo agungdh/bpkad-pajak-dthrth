@@ -23,9 +23,11 @@ class DatabaseSeeder extends Seeder
 
         // Create test user and assign admin role
         $testUser = User::firstOrCreate(
-            ['email' => 'test@example.com'],
+            ['username' => 'admin'],
             [
                 'name' => 'Test User',
+                'username' => 'admin',
+                'email' => 'test@example.com',
                 'password' => 'password',
                 'email_verified_at' => now(),
             ]
