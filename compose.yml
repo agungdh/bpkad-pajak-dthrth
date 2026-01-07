@@ -27,5 +27,17 @@ services:
           - "127.0.0.1:5050:80"
       depends_on:
           - postgres
+  seaweedfs:
+      image: chrislusf/seaweedfs
+      container_name: seaweedfs
+      restart: always
+      command: server -s3
+      ports:
+          - "127.0.0.1:9333:9333"
+          - "127.0.0.1:8888:8888"
+          - "127.0.0.1:8333:8333"
+      volumes:
+          - seaweedfs_data:/data
 volumes:
   postgres_data:
+  seaweedfs_data:
