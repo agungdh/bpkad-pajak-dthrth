@@ -1,0 +1,20 @@
+{
+    "identities": [
+        {
+            "name": "admin",
+            "credentials": [
+                {
+                    "accessKey": "admin",
+                    "secretKey": "admin123secret"
+                }
+            ],
+            "actions": [
+                "Admin",
+                "Read",
+                "Write",
+                "List",
+                "Tagging"
+            ]
+        }
+    ]
+}

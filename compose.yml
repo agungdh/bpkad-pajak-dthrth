@@ -31,13 +31,14 @@ services:
       image: chrislusf/seaweedfs
       container_name: seaweedfs
       restart: always
-      command: server -s3
+      command: server -s3 -s3.config=/etc/seaweedfs/s3.json
       ports:
           - "127.0.0.1:9333:9333"
           - "127.0.0.1:8888:8888"
           - "127.0.0.1:8333:8333"
       volumes:
           - seaweedfs_data:/data
+          - ./docker/seaweedfs/s3.json:/etc/seaweedfs/s3.json:ro
 volumes:
   postgres_data:
   seaweedfs_data:
