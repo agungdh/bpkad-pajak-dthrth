@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,6 +13,14 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // Drop existing timestamps columns to replace with epoch
             $table->dropTimestamps();
+
+            // Change email_verified_at from timestamp to epoch (unsignedBigInteger)
+            $table->dropColumn('email_verified_at');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            // Add email_verified_at as epoch
+            $table->unsignedBigInteger('email_verified_at')->nullable()->after('email');
 
             // Add epoch-based timestamps
             $table->unsignedBigInteger('created_at')->nullable()->after('remember_token');
@@ -34,9 +41,12 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // Drop epoch-based columns
-            $table->dropColumn(['created_at', 'updated_at', 'created_by', 'updated_by', 'deleted_at', 'deleted_by']);
+            $table->dropColumn(['email_verified_at', 'created_at', 'updated_at', 'created_by', 'updated_by', 'deleted_at', 'deleted_by']);
+        });
 
+        Schema::table('users', function (Blueprint $table) {
             // Restore original timestamps
+            $table->timestamp('email_verified_at')->nullable()->after('email');
             $table->timestamps();
         });
     }
