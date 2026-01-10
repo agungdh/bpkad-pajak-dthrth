@@ -54,7 +54,7 @@ trait HasUuid
         }
 
         // Ensure 'id' is always in the columns for cursor pagination
-        if ($columns !== ['*'] && !in_array('id', $columns) && !in_array("{$table}.id", $columns)) {
+        if ($columns !== ['*'] && ! in_array('id', $columns) && ! in_array("{$table}.id", $columns)) {
             $columns[] = "{$table}.id";
         }
 
@@ -78,7 +78,7 @@ trait HasUuid
         try {
             $decoded = json_decode(base64_decode($cursor), true);
 
-            if (!$decoded) {
+            if (! $decoded) {
                 return null;
             }
 
