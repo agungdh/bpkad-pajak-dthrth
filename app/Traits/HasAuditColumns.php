@@ -52,7 +52,7 @@ trait HasAuditColumns
      */
     public function initializeHasAuditColumns(): void
     {
-        if (!isset($this->casts['deleted_at'])) {
+        if (! isset($this->casts['deleted_at'])) {
             $this->casts['deleted_at'] = 'integer';
         }
     }
@@ -123,7 +123,7 @@ trait HasAuditColumns
      */
     public function trashed(): bool
     {
-        return !is_null($this->{$this->getDeletedAtColumn()});
+        return ! is_null($this->{$this->getDeletedAtColumn()});
     }
 
     /**
@@ -147,7 +147,7 @@ trait HasAuditColumns
      */
     public function getDeletedAtColumn(): string
     {
-        return defined(static::class . '::DELETED_AT') ? static::DELETED_AT : 'deleted_at';
+        return defined(static::class.'::DELETED_AT') ? static::DELETED_AT : 'deleted_at';
     }
 
     /**
