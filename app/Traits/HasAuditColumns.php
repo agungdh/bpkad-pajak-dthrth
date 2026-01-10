@@ -40,7 +40,7 @@ trait HasAuditColumns
 
         // Set deleted_at and deleted_by when soft deleting
         static::deleting(function ($model) {
-            if (!$model->isForceDeleting()) {
+            if (! $model->isForceDeleting()) {
                 $model->deleted_at = time(); // epoch timestamp
 
                 if (Auth::check()) {

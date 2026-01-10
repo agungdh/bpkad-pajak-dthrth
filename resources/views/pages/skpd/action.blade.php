@@ -3,7 +3,11 @@
         <i class="bx bx-edit me-1"></i>
         Ubah
     </a>
-    <button type="button" class="btn btn-sm btn-danger" onclick="hapusData('{{ $row->id }}')">
+    <button
+        type="button"
+        class="btn btn-sm btn-danger"
+        onclick="hapusData('{{ $row->id }}')"
+    >
         <i class="bx bx-trash me-1"></i>
         Hapus
     </button>

@@ -49,7 +49,12 @@
             },
             columns: [
                 { data: 'nama', name: 'nama' },
-                { data: 'action', name: 'action', searchable: false, orderable: false },
+                {
+                    data: 'action',
+                    name: 'action',
+                    searchable: false,
+                    orderable: false,
+                },
             ],
         });
 
