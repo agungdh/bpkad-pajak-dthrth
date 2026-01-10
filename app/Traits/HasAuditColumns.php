@@ -48,13 +48,24 @@ trait HasAuditColumns
     }
 
     /**
-     * Initialize the soft deleting trait for an instance.
+     * Initialize the HasAuditColumns trait for an instance.
      */
     public function initializeHasAuditColumns(): void
     {
         if (! isset($this->casts['deleted_at'])) {
             $this->casts['deleted_at'] = 'integer';
         }
+
+        // Hide audit columns from serialization
+        $this->hidden = array_merge($this->hidden, [
+            'id',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'created_by',
+            'updated_by',
+            'deleted_by',
+        ]);
     }
 
     /**

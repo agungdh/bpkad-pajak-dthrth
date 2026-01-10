@@ -11,6 +11,6 @@ class SkpdSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Skpd::factory(10)->create();
+        \App\Models\Skpd::factory(100)->create();
     }
 }

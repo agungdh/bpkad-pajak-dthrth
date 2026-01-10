@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasAuditColumns, HasFactory, HasRoles, HasUuid, Notifiable;
+    use HasApiTokens, HasAuditColumns, HasFactory, HasRoles, HasUuid, Notifiable;
 
     /**
      * Indicates if the model should be timestamped.
