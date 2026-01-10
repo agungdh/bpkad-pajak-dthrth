@@ -45,6 +45,9 @@ trait HasUuid
         // Get the table name
         $table = $query->getModel()->getTable();
 
+        // Get total count before pagination
+        $total = $query->toBase()->getCountForPagination();
+
         // Decode UUID cursor to ID cursor
         if ($cursor) {
             $cursor = $this->decodeUuidCursor($cursor);
@@ -59,7 +62,12 @@ trait HasUuid
         $paginator = $query->orderBy("{$table}.id")->cursorPaginate($perPage, $columns, $cursorName, $cursor);
 
         // Transform cursors to use UUID and return as array
-        return $this->transformCursorsToUuid($paginator, $table);
+        $response = $this->transformCursorsToUuid($paginator, $table);
+
+        // Add total count to response
+        $response['total'] = $total;
+
+        return $response;
     }
 
     /**
