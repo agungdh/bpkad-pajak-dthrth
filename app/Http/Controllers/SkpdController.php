@@ -16,6 +16,15 @@ class SkpdController extends Controller
             $query->where('nama', 'like', "%{$search}%");
         }
 
+        // Add sorting
+        if ($sortBy = request('sort_by')) {
+            $direction = request('sort_order', 'asc');
+            // Allow sorting by specific columns only for safety
+            if (in_array($sortBy, ['nama'])) {
+                $query->orderBy($sortBy, $direction);
+            }
+        }
+
         return $query->uuidCursorPaginate();
     }
 

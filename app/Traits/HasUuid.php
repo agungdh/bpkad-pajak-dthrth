@@ -54,7 +54,7 @@ trait HasUuid
         }
 
         // Ensure 'id' is always in the columns for cursor pagination
-        if ($columns !== ['*'] && ! in_array('id', $columns) && ! in_array("{$table}.id", $columns)) {
+        if ($columns !== ['*'] && !in_array('id', $columns) && !in_array("{$table}.id", $columns)) {
             $columns[] = "{$table}.id";
         }
 
@@ -78,35 +78,29 @@ trait HasUuid
         try {
             $decoded = json_decode(base64_decode($cursor), true);
 
-            if (! $decoded) {
+            if (!$decoded) {
                 return null;
             }
 
-            // Find the UUID key and get the ID
+            $params = $decoded;
+            $pointsToNext = $params['_pointsToNextItems'] ?? true;
+            unset($params['_pointsToNextItems']);
+
+            // Generic table lookup
+            // We assume the model class using this trait knows its table
+            // But here we are in a static context or scope? No, scope is not static but trait methods are ...
+            // Wait, this is called from scope which has $query.
+            // But decodeUuidCursor doesn't have query.
+            // We need to find table name from key.
+
             $newParams = [];
-            $pointsToNext = true;
+            foreach ($params as $key => $value) {
+                if (str_ends_with($key, '.uuid')) {
+                    $table = substr($key, 0, -5); // remove .uuid
+                    $id = DB::table($table)->where('uuid', $value)->value('id');
 
-            foreach ($decoded as $key => $value) {
-                if ($key === '_pointsToNextItems') {
-                    $pointsToNext = $value;
-
-                    continue;
-                }
-
-                // This is a table.column => uuid pair
-                // We need to look up the ID from UUID
-                if (str_contains($key, '.')) {
-                    [$table, $column] = explode('.', $key);
-
-                    if ($column === 'uuid') {
-                        // Look up ID from UUID
-                        $id = DB::table($table)->where('uuid', $value)->value('id');
-
-                        if ($id) {
-                            $newParams["{$table}.id"] = $id;
-                        }
-                    } else {
-                        $newParams[$key] = $value;
+                    if ($id) {
+                        $newParams["{$table}.id"] = $id;
                     }
                 } else {
                     $newParams[$key] = $value;
@@ -124,40 +118,50 @@ trait HasUuid
      */
     protected function transformCursorsToUuid(CursorPaginator $paginator, string $table): array
     {
-        $items = $paginator->items();
         $response = $paginator->toArray();
 
         // Remove ID-based cursors
         $response['next_cursor'] = null;
         $response['prev_cursor'] = null;
 
-        if (empty($items)) {
-            return $response;
+        if ($paginator->hasMorePages() && $paginator->nextCursor()) {
+            $cursor = $paginator->nextCursor();
+            $response['next_cursor'] = $this->encodeGenericCursor($cursor, $table, $paginator->items(), true);
         }
 
-        // Transform next_cursor
-        if ($paginator->hasMorePages()) {
-            $lastItem = end($items);
-            $response['next_cursor'] = $this->encodeUuidCursor($table, $lastItem->uuid, true);
-        }
-
-        // Transform prev_cursor
         if ($paginator->previousCursor()) {
-            $firstItem = reset($items);
-            $response['prev_cursor'] = $this->encodeUuidCursor($table, $firstItem->uuid, false);
+            $cursor = $paginator->previousCursor();
+            $response['prev_cursor'] = $this->encodeGenericCursor($cursor, $table, $paginator->items(), false);
         }
 
         return $response;
     }
 
     /**
-     * Encode UUID-based cursor.
+     * Encode generic cursor, swapping ID for UUID.
      */
-    protected function encodeUuidCursor(string $table, string $uuid, bool $pointsToNext): string
+    protected function encodeGenericCursor(Cursor $cursor, string $table, array $items, bool $isNext): string
     {
-        return base64_encode(json_encode([
-            "{$table}.uuid" => $uuid,
-            '_pointsToNextItems' => $pointsToNext,
-        ]));
+        $cursorArray = $cursor->toArray();
+        if (isset($cursorArray['_pointsToNextItems'])) {
+            unset($cursorArray['_pointsToNextItems']);
+        }
+        $params = $cursorArray;
+
+        // We need the UUID of the reference item.
+        // For Next cursor, it's the last item.
+        // For Prev cursor, it's the first item.
+        $item = $isNext ? end($items) : reset($items);
+
+        // Safety check
+        if ($item && isset($item->uuid) && isset($params["{$table}.id"])) {
+            unset($params["{$table}.id"]);
+            $params["{$table}.uuid"] = $item->uuid;
+        }
+
+        return base64_encode(json_encode(array_merge(
+            $params,
+            ['_pointsToNextItems' => $cursor->pointsToNextItems()]
+        )));
     }
 }
