@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Skpd>
@@ -17,7 +18,7 @@ class SkpdFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => (string) \Illuminate\Support\Str::uuid(),
+            'uuid' => (string) Str::uuid(),
             'nama' => fake()->randomElement([
                 'Dinas Pendidikan',
                 'Dinas Kesehatan',
@@ -30,6 +31,8 @@ class SkpdFactory extends Factory
                 'Dinas Komunikasi dan Informatika',
                 'Badan Perencanaan Pembangunan Daerah',
             ]),
+            'created_at' => time(),
+            'updated_at' => time(),
         ];
     }
 }

@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function() {
+        return auth()->user();
+    });
+
     Route::post('/skpd/datatable', [SkpdController::class, 'datatable']);
     Route::resource('/skpd', SkpdController::class);
 

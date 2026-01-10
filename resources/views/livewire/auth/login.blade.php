@@ -5,7 +5,7 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home') }}"><b>{{ config('app.name') }}</b></a>
+            <a href="/"><b>{{ config('app.name') }}</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
