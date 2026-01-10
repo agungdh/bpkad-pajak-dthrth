@@ -1,32 +1,48 @@
-# BPKAD Pajak DTHRTH
+# BPKAD Pajak DTHRTH API
 
-> ⚠️ **Proof of Concept - Status: Failed**
-
-## Overview
-
-This is a proof of concept application for BPKAD Pajak system using Laravel with AdminLTE and Alpine.js.
+Backend API untuk sistem BPKAD Pajak DTHRTH.
 
 ## Tech Stack
 
+- PHP 8.5
 - Laravel 12
-- AdminLTE 4
-- Alpine.js
-- jQuery + DataTables
+- PostgreSQL / MySQL
 
-## Conclusion
+## Requirements
 
-This POC encountered significant challenges with the frontend architecture:
+- PHP >= 8.2
+- Composer
+- Database (PostgreSQL/MySQL)
 
-1. **Alpine.js timing issues** - Component registration conflicts with script loading order
-2. **Complex state management** - Mixing Alpine.js, jQuery, and Blade templates creates maintenance overhead
-3. **Limited reactivity** - Blade + Alpine combo lacks the developer experience of modern SPA frameworks
+## Installation
 
-## Recommendation
+```bash
+# Install dependencies
+composer install
 
-**Better approach: Laravel as API + Separate Frontend**
+# Copy environment file
+cp .env.example .env
 
-- Use Laravel purely as REST/GraphQL API backend
-- Build frontend with dedicated SPA framework (Vue, React, or Next.js)
-- Cleaner separation of concerns
-- Better developer experience
-- Easier testing and maintenance
+# Generate app key
+php artisan key:generate
+
+# Run migrations
+php artisan migrate
+
+# Run seeders (optional)
+php artisan db:seed
+```
+
+## Development
+
+```bash
+# Run local server
+php artisan serve
+
+# Run tests
+php artisan test
+```
+
+## API Documentation
+
+API documentation available at `/docs/api` (if enabled).
