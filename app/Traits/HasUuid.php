@@ -42,16 +42,21 @@ trait HasUuid
     {
         $cursor = $cursor ?? request()->input($cursorName);
 
+        // Get the table name
+        $table = $query->getModel()->getTable();
+
         // Decode UUID cursor to ID cursor
         if ($cursor) {
             $cursor = $this->decodeUuidCursor($cursor);
         }
 
-        // Get the table name
-        $table = $query->getModel()->getTable();
+        // Ensure 'id' is always in the columns for cursor pagination
+        if ($columns !== ['*'] && !in_array('id', $columns) && !in_array("{$table}.id", $columns)) {
+            $columns[] = "{$table}.id";
+        }
 
-        // Perform cursor pagination with ID
-        $paginator = $query->orderBy('id')->cursorPaginate($perPage, $columns, $cursorName, $cursor);
+        // Perform cursor pagination with ID (use table-qualified column name)
+        $paginator = $query->orderBy("{$table}.id")->cursorPaginate($perPage, $columns, $cursorName, $cursor);
 
         // Transform cursors to use UUID and return as array
         return $this->transformCursorsToUuid($paginator, $table);
@@ -65,7 +70,7 @@ trait HasUuid
         try {
             $decoded = json_decode(base64_decode($cursor), true);
 
-            if (! $decoded) {
+            if (!$decoded) {
                 return null;
             }
 

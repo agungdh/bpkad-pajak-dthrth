@@ -9,7 +9,14 @@ class SkpdController extends Controller
 {
     public function index()
     {
-        return Skpd::uuidCursorPaginate();
+        $query = Skpd::query();
+
+        // Add search filter if search parameter exists
+        if ($search = request('search')) {
+            $query->where('nama', 'like', "%{$search}%");
+        }
+
+        return $query->uuidCursorPaginate();
     }
 
     public function store(SkpdCreateUpdateRequest $request)
@@ -18,6 +25,8 @@ class SkpdController extends Controller
 
         $skpd = new Skpd;
         $this->saveData($skpd, $form);
+
+        return $skpd;
     }
 
     public function show(Skpd $skpd)
@@ -30,6 +39,8 @@ class SkpdController extends Controller
         $form = $request->validated();
 
         $this->saveData($skpd, $form);
+
+        return $skpd;
     }
 
     public function destroy(Skpd $skpd)
