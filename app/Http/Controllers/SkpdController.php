@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SkpdCreateUpdateRequest;
 use App\Models\Skpd;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -32,23 +33,28 @@ class SkpdController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.skpd.form');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SkpdCreateUpdateRequest $request)
     {
-        //
+        $form = $request->validated();
+
+        $skpd = new Skpd;
+        $this->saveData($skpd, $form);
+
+        request()->session()->flash('success', 'Skpd berhasil disimpan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Skpd $skpd)
     {
-        //
+        return $skpd;
     }
 
     /**
@@ -56,15 +62,21 @@ class SkpdController extends Controller
      */
     public function edit(Skpd $skpd)
     {
-        return $skpd;
+        return view('pages.skpd.form', compact([
+            'skpd',
+        ]));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SkpdCreateUpdateRequest $request, Skpd $skpd)
     {
-        //
+        $form = $request->validated();
+
+        $this->saveData($skpd, $form);
+
+        request()->session()->flash('success', 'Skpd berhasil disimpan.');
     }
 
     /**
@@ -73,5 +85,11 @@ class SkpdController extends Controller
     public function destroy(Skpd $skpd)
     {
         $skpd->delete();
+    }
+
+    private function saveData(Skpd $skpd, mixed $form): void
+    {
+        $skpd->nama = $form['nama'];
+        $skpd->save();
     }
 }
