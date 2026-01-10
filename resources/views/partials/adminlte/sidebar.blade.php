@@ -2,7 +2,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="{{ route('dashboard') }}" class="brand-link">
+        <a href="/" class="brand-link">
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">{{ config('app.name') }}</span>
             <!--end::Brand Text-->
@@ -25,7 +25,7 @@
             >
                 <li class="nav-item">
                     <a
-                        href="{{ route('dashboard') }}"
+                        href="/dashboard"
                         class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
                     >
                         <i class="nav-icon bi bi-speedometer"></i>
@@ -35,39 +35,13 @@
 
                 <li class="nav-header">MASTER DATA</li>
 
-                @can('viewAny', App\Models\Skpd::class)
-                    <li class="nav-item">
-                        <a
-                            href="{{ route('skpds.index') }}"
-                            class="nav-link {{ request()->routeIs('skpds.*') ? 'active' : '' }}"
-                        >
-                            <i class="nav-icon bi bi-building"></i>
-                            <p>SKPD</p>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('viewAny', App\Models\User::class)
-                    <li class="nav-item">
-                        <a
-                            href="{{ route('users.index') }}"
-                            class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
-                        >
-                            <i class="nav-icon bi bi-people"></i>
-                            <p>Users</p>
-                        </a>
-                    </li>
-                @endcan
-
-                <li class="nav-header">EXAMPLES</li>
-
                 <li class="nav-item">
                     <a
-                        href="{{ route('examples.simple-tables') }}"
-                        class="nav-link {{ request()->routeIs('examples.simple-tables') ? 'active' : '' }}"
+                        href="/skpd"
+                        class="nav-link {{ request()->routeIs('skpd.*') ? 'active' : '' }}"
                     >
-                        <i class="nav-icon bi bi-table"></i>
-                        <p>Simple Tables</p>
+                        <i class="nav-icon bi bi-building"></i>
+                        <p>SKPD</p>
                     </a>
                 </li>
             </ul>
