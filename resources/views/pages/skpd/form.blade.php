@@ -62,8 +62,60 @@
     <!--end::Row-->
 @endsection
 
+@push('pre-scripts')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('form', () => ({
+                formData: {
+                    nama: '',
+                },
+                validationErrors: {},
+
+                async initData(id) {
+                    let res = await axios.get(`/skpd/${id}`);
+                    let data = res.data;
+
+                    for (let key in this.formData) {
+                        if (data.hasOwnProperty(key)) {
+                            this.formData[key] = data[key];
+                        }
+                    }
+                },
+
+                async submit() {
+                    try {
+                        if (id) {
+                            await axios.put(`/skpd/${id}`, this.formData);
+                        } else {
+                            await axios.post('/skpd', this.formData);
+                        }
+
+                        window.location.href = '/skpd';
+                    } catch (err) {
+                        if (err.response?.status === 422) {
+                            this.validationErrors = err.response.data.errors ?? {};
+                        } else {
+                            toastr.error(
+                                'Terjadi kesalahan sistem. Silahkan refresh halaman ini. Jika error masih terjadi, silahkan hubungi Tim IT.',
+                            );
+                        }
+                    }
+                },
+            }));
+        });
+    </script>
+@endpush
+
 @push('scripts')
     <script type="module">
+        id = @json($skpd?->uuid ?? null);
 
+        $(document).ready(function () {
+            formComponent = document.getElementById('formComponent');
+
+            formAlpine = Alpine.$data(formComponent);
+
+            id && formAlpine.initData(id);
+        });
     </script>
 @endpush
