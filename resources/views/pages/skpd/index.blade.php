@@ -22,13 +22,20 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="tabel" class="table-bordered table">
-                        <thead>
+                    <div class="card-header text-start">
+                        <a href="/skpd/create" class="btn btn-primary btn-sm">
+                            Tambah
+                        </a>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="tabel" class="table table-striped table-bordered table-hover table-sm">
+                            <thead>
                             <tr>
                                 <th>Nama</th>
                             </tr>
-                        </thead>
-                    </table>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- /.card -->
