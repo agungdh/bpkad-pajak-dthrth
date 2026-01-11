@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KodePajakController;
 use App\Http\Controllers\SkpdController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,6 @@ Route::prefix('auth')->group(function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('/skpd', SkpdController::class);
     Route::resource('/kode-pajak', KodePajakController::class);
+    Route::get('/users/roles', [UserController::class, 'roles']);
+    Route::resource('/users', UserController::class);
 });
