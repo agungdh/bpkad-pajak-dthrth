@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KodePajakController;
 use App\Http\Controllers\SkpdController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::prefix('auth')->group(function () {
 // Protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('/skpd', SkpdController::class);
+    Route::resource('/kode-pajak', KodePajakController::class);
 });
